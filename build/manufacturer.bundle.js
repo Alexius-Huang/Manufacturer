@@ -1,5 +1,14 @@
-var Manufacturer =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("Manufacturer", [], factory);
+	else if(typeof exports === 'object')
+		exports["Manufacturer"] = factory();
+	else
+		root["Manufacturer"] = factory();
+})(window, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -14159,4 +14168,5 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ })
 
-/******/ });
+/******/ })["default"];
+});

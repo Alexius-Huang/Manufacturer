@@ -7,8 +7,10 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'manufacturer.bundle.js',
-    libraryTarget: 'var',
-    library: 'Manufacturer'
+    library: 'Manufacturer',
+    libraryExport: 'default',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   module: {
     rules: [
