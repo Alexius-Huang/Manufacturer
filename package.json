@@ -1,6 +1,6 @@
 {
   "name": "manufacturer",
-  "version": "1.0.0-alpha3",
+  "version": "1.0.0-alpha4",
   "description": "JS Factory Pattern Implementation",
   "main": "./build/manufacturer.bundle.js",
   "author": "Maxwell-Alexius",
