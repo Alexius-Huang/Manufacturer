@@ -1,5 +1,6 @@
 import Faker from 'faker';
 import Moment from 'moment';
+import { isManufacturer } from './helpers/is';
 
 const Type = {};
 
@@ -22,12 +23,7 @@ Type.ArrayOf = (type, options) => {
   return () =>
     Array
       .from(Array(elementCount))
-      .map(() => {
-        if (isType(type)) {
-          return type.create();
-        }
-        return type();
-      });
+      .map(() => (isManufacturer(type) ? type.create() : type() ));
 };
 
 Type.OneOf = (options) => {
@@ -55,6 +51,8 @@ Type.Random.Integer.Between = (min, max) =>
 /* Time Integration with MomentJS */
 Type.Time = (timeString, format) => Moment(timeString, format);
 Type.Time.Now = format => Moment().format(format);
+Type.Time.After = (number, unit, format) => Moment().add(number, unit).format(format);
+Type.Time.Before = (number, unit, format) => Moment().subtract(number, unit).format(format);
 
 Type.Timestamp = time => Moment(time).unix();
 Type.Timestamp.Now = () => Moment().unix();

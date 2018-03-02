@@ -1,8 +1,8 @@
 {
   "name": "manufacturer",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha2",
   "description": "JS Factory Pattern Implementation",
-  "main": "manufacturer.js",
+  "main": "./build/manufacturer.bundle.js",
   "author": "Maxwell-Alexius",
   "license": "MIT",
   "dependencies": {
@@ -22,5 +22,13 @@
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.10",
     "webpack-dev-server": "^3.1.0"
+  },
+  "keywords": [
+    "factory",
+    "design pattern"
+  ],
+  "repository": {
+    "url": "https://github.com/Maxwell-Alexius/Manufacturer",
+    "type": "git"
   }
 }
