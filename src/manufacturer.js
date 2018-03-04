@@ -1,6 +1,6 @@
-import { isManufacturer } from './helpers/is';
+import { isManufacturer, isTypeObject } from './helpers/is';
 import traverseObjectPairs from './helpers/traverseObjectPairs';
-import Type from './type';
+import Type from './types/Type.Extend';
 
 class Manufacturer {
   constructor(blueprint) {
@@ -60,13 +60,13 @@ class Manufacturer {
     let object = {};
 
     /* Traverse each attribute and create data according to blueprint */
-    traverseObjectPairs(this.blueprint, (attr, dataType) => {
-      if (isManufacturer(dataType)) {
-        object[attr] = dataType.create();
-      } else if (dataType instanceof Function) {
-        object[attr] = (dataType.bind(this))();
+    traverseObjectPairs(this.blueprint, (attr, obj) => {
+      if (isManufacturer(obj)) {
+        object[attr] = obj.create();
+      } else if (obj.__isTypeObject__) {
+        object[attr] = (obj.resolver.bind(this))();
       } else {
-        object[attr] = dataType;
+        object[attr] = obj;
       }
     });
 

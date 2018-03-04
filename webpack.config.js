@@ -9,8 +9,7 @@ module.exports = {
     filename: 'manufacturer.bundle.js',
     library: 'Manufacturer',
     libraryExport: 'default',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    libraryTarget: 'commonjs2'
   },
   module: {
     rules: [
