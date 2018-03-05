@@ -22,29 +22,9 @@ export default class StringType extends Type {
   get Lorem() {
     return new LoremType();
   }
-
-  Characters(count) {
-    this.characters = count || this.cache || defaults.characters;
-    this.cache = null;
-    this.resetResolver();
-    return this;
-  }
-
-  WithCharacters(count) {
-    return this.Characters(count);
-  }
-
-  CharacterSet(set) {
-    this.characterSet = set || this.cache || defaults.characterSet;
-    this.resetResolver();
-    return this;
-  }
-
-  WithCharacterSet(set) {
-    return this.CharacterSet(set);
-  }
-
-  resetResolver() {
-    this.resolver = () => StringResolver(this);
-  }
 }
+
+StringType.UseResolver(StringResolver);
+
+StringType.DefineBuiltInTrait('characters', defaults.characters);
+StringType.DefineBuiltInTrait('characterSet', defaults.characterSet);

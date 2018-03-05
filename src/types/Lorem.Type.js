@@ -30,28 +30,6 @@ export default class LoremType extends Type {
     });
   }
 
-  Unit(unit) {
-    this.unit = unit || this.cache || defaults.unit;
-    this.cache = null;
-    this.resetResolver();
-    return this;
-  }
-
-  WithUnit(unit) {
-    return this.Unit(unit);
-  }
-
-  Number(number) {
-    this.number = number || this.cache || defaults.number;
-    this.cache = null;
-    this.resetResolver();
-    return this;
-  }
-
-  WithNumber(number) {
-    return this.Number(number);
-  }
-
   Words(number) {
     this.unit = 'word';
     return this.Number(number);
@@ -83,3 +61,8 @@ export default class LoremType extends Type {
     this.resolver = () => LoremResolver(this);
   }
 }
+
+LoremType.UseResolver(LoremResolver);
+
+LoremType.DefineBuiltInTrait('unit', defaults.unit);
+LoremType.DefineBuiltInTrait('number', defaults.number);

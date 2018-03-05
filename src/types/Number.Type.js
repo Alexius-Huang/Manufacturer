@@ -58,17 +58,6 @@ export default class NumberType extends Type {
     return this.Between(min, max);
   }
 
-  Type(type) {
-    this.type = type || this.cache || defaults.type;
-    this.cache = null;
-    this.resetResolver();
-    return this;
-  }
-
-  WithType(type) {
-    return this.Type(type);
-  }
-
   Maximum(max) {
     this.max = max || this.cache || defaults.max;
     this.cache = null;
@@ -90,8 +79,8 @@ export default class NumberType extends Type {
   WithMinimum(min) {
     return this.Minimum(min);
   }
-
-  resetResolver() {
-    this.resolver = () => NumberResolver(this);
-  }
 }
+
+NumberType.UseResolver(NumberResolver);
+
+NumberType.DefineBuiltInTrait('type', defaults.type);

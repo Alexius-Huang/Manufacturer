@@ -121,13 +121,13 @@ describe('StringType', () => {
 
       validate(
         Manufacturer.define({
-          name: Type.String.Characters(15).CharacterSet('1234567890')
+          name: Type.String.Characters(15).And.CharacterSet('1234567890')
         }).create()
       );
 
       validate(
         Manufacturer.define({
-          name: Type.String.WithCharacterSet('1234567890').WithCharacters(15)
+          name: Type.String.WithCharacterSet('1234567890').And.WithCharacters(15)
         }).create()
       );
 

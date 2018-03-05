@@ -12,6 +12,10 @@ export default class Type {
 
     this.cache = null;
     this.As = {};
+
+    Object.defineProperties(this, {
+      And: { get: () => this }
+    });
   }
 
   With(data) {
@@ -40,5 +44,28 @@ export default class Type {
     this[trait] = value;
     this.resetResolver();
     return this;
+  }
+
+  static DefineBuiltInTrait(traitName, defaultValue) {
+    const capitalizedTraitName = traitName.capitalize();
+
+    /* Define Direct-Trait Method */
+    this.prototype[capitalizedTraitName] = function(traitInputValue) {
+      this[traitName] = traitInputValue || this.cache || defaultValue;
+      this.cache = null;
+      this.resetResolver();
+      return this;
+    };
+
+    /* Define With-Trait Method */
+    this.prototype[`With${capitalizedTraitName}`] = function(traitInputValue) {
+      return this[capitalizedTraitName](traitInputValue);
+    };
+  }
+
+  static UseResolver(resolver) {
+    this.prototype.resetResolver = function() {
+      this.resolver = () => resolver(this);
+    };
   }
 }

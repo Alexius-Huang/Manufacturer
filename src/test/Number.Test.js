@@ -3,8 +3,6 @@ import should from 'should';
 
 const { Type } = Manufacturer;
 
-import NumberType from '../types/Number.Type';
-
 function repeat(number, callback) {
   for (let i = 0; i < number; i++) callback();
 }

@@ -220,7 +220,7 @@ describe('LoremType', () => {
       const PersonFactory = Manufacturer.define({
         description: Type.String.Lorem
           .With(2).Number()
-          .With('sentence').Unit()
+          .And.With('sentence').Unit()
       });
       const person = PersonFactory.create();
 
