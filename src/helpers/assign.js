@@ -14,5 +14,8 @@ export default function assign(type, defaultValue, value) {
     case 'function':
       if (_.isFunction(value)) return value;
       return defaultValue;
+    case 'any':
+      if (!_.isUndefined(value)) return value;
+      return defaultValue;
   }
 };

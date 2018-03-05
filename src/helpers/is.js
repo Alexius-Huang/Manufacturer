@@ -25,3 +25,7 @@ export function isBoolean(data) {
 export function isFunction(data) {
   return typeof data === 'function';
 }
+
+export function isUndefined(data) {
+  return typeof data === 'undefined';
+}
