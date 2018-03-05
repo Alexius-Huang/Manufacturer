@@ -1,96 +1,82 @@
 import Type from './Type';
 import LoremResolver from '../resolvers/Lorem.Resolver';
+import assign from '../helpers/assign';
 
 const defaults = {
   unit: 'word',
   random: false,
-  number: 1
+  number: 5
 };
 
 export default class LoremType extends Type {
   constructor(options = defaults) {
     super('Lorem', LoremResolver);
-    this.unit = options.unit || defaults.unit;
-    this.random = (options.random !== undefined && !!options.random) || !!defaults.random;
-    this.number = options.number || defaults.number;
+    this.unit = assign('string', defaults.unit, options.unit);
+    this.random = assign('boolean', defaults.random, options.random);
+    this.number = assign('number', defaults.number, options.number);
 
-    this.As = {
-      Unit: () => this.Unit(),
-      Random: () => this.Random(),
-      Number: () => this.Number(),
-      Words: () => this.Words(),
-      Sentences: () => this.Sentences(),
-      Paragraphs: () => this.Paragraphs()
+    const switchProperties = {
+      Random: { get: () => this.activate('random') },
     };
+
+    Object.defineProperties(this, switchProperties);
+    Object.defineProperties(this.As, {
+      Unit: { get: () => this.Unit(this.cache) },
+      Number: { get: () => this.Number(this.cache) },
+      Words: { get: () => this.Words(this.cache) },
+      Sentences: { get: () => this.Sentences(this.cache) },
+      Paragraphs: { get: () => this.Paragraphs(this.cache) },
+      ...switchProperties
+    });
   }
 
-  WithUnit(unit = 'word') {
-    this.unit = unit;
+  Unit(unit) {
+    this.unit = unit || this.cache || defaults.unit;
+    this.cache = null;
     this.resetResolver();
     return this;
   }
 
-  WithRandom(random = true) {
-    this.random = !!random;
+  WithUnit(unit) {
+    return this.Unit(unit);
+  }
+
+  Number(number) {
+    this.number = number || this.cache || defaults.number;
+    this.cache = null;
     this.resetResolver();
     return this;
   }
 
-  WithNumber(number = 1) {
-    this.number = number;
-    this.resetResolver();
-    return this;
+  WithNumber(number) {
+    return this.Number(number);
   }
 
-  WithWords(number = 1) {
+  Words(number) {
     this.unit = 'word';
-    return this.WithNumber();
+    return this.Number(number);
   }
 
-  WithSentences(number = 1) {
+  WithWords(number) {
+    return this.Words(number);
+  }
+
+  Sentences(number) {
     this.unit = 'sentence';
-    return this.WithNumber();
+    return this.Number(number);
   }
 
-  WithParagraphs(number = 1) {
+  WithSentences(number) {
+    return this.Sentences(number);
+  }
+
+  Paragraphs(number) {
     this.unit = 'paragraph';
-    return this.WithNumber();
+    return this.Number(number);
   }
 
-  Unit() {
-    this.unit = this.cache;
-    this.cache = null;
-    this.resetResolver();
-    return this;
-  }
-
-  Random() {
-    this.random = this.cache;
-    this.cache = null;
-    this.resetResolver();
-    return this;
-  }
-
-  Number() {
-    this.number = this.cache;
-    this.cache = null;
-    this.resetResolver();
-    return this;
-  }
-
-  Words() {
-    this.unit = 'word';
-    return this.Number();
-  }
-
-  Sentences(num) {
-    this.unit = 'sentence';
-    return this.Number();
-  }
-
-  Paragraphs() {
-    this.unit = 'paragraph';
-    return this.Number();
+  WithParagraphs(number) {
+    return this.Paragraphs(number);
   }
 
   resetResolver() {

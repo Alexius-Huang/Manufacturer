@@ -119,6 +119,7 @@ const Lorem = {
       if (paragraphIndex == LoremSentences.length) paragraphIndex = 0;
     }
 
+    lorem = lorem.chop();
     return lorem;
   }
 }

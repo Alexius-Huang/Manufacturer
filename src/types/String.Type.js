@@ -13,40 +13,35 @@ export default class StringType extends Type {
     this.characters = options.characters || defaults.characters;
     this.characterSet = options.characterSet || defaults.characterSet;
 
-    this.As = {
-      Characters: () => this.Characters(),
-      CharacterSet: () => this.CharacterSet()
-    };
+    Object.defineProperties(this.As, {
+      Characters: { get: () => this.Characters(this.cache) },
+      CharacterSet: { get: () => this.CharacterSet(this.cache) }
+    });
   }
 
   get Lorem() {
     return new LoremType();
   }
 
-  WithCharacters(count = 1) {
-    this.characters = count;
+  Characters(count) {
+    this.characters = count || this.cache || defaults.characters;
+    this.cache = null;
+    this.resetResolver();
+    return this;
+  }
+
+  WithCharacters(count) {
+    return this.Characters(count);
+  }
+
+  CharacterSet(set) {
+    this.characterSet = set || this.cache || defaults.characterSet;
     this.resetResolver();
     return this;
   }
 
   WithCharacterSet(set) {
-    this.characterSet = set;
-    this.resetResolver();
-    return this;
-  }
-
-  Characters() {
-    this.characters = this.cache;
-    this.cache = null;
-    this.resetResolver();
-    return this;
-  }
-
-  CharacterSet() {
-    this.characterSet = this.cache;
-    this.cache = null;
-    this.resetResolver();
-    return this;
+    return this.CharacterSet(set);
   }
 
   resetResolver() {

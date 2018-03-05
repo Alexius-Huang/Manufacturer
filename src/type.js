@@ -2,53 +2,6 @@
 // import Moment from 'moment';
 // import { isManufacturer } from './helpers/is';
 
-import * as StringResolver from './resolvers/String';
-
-class Type {
-  constructor(title, resolver) {
-    this.title = title;
-    this.resolver = resolver;
-    this.__isTypeObject__ = true;
-  }
-}
-
-const defaults = {
-  characters: 10,
-  characterSet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-};
-
-class StringType extends Type {
-  constructor(title, resolver, options) {
-    super(title, resolver);
-    this.characters = options.characters || defaults.characters;
-    this.characterSet = options.characterSet || defaults.characterSet;
-  }
-
-  WithCharacters(count = 1) {
-    this.characters = count;
-    this.setNewResolver();
-    return this;
-  }
-
-  WithCharacterSet(set) {
-    this.characterSet = set;
-    this.setNewResolver();
-    return this;
-  }
-
-  setNewResolver() {
-    this.resolver = () => StringResolver.string(this);
-  }
-}
-
-Type.String = new Type('String', StringResolver.string);
-
-Type.String.WithCharacters = (characters) =>
-  new StringType('String', () => StringResolver.string({ ...defaults, characters }), { characters });
-Type.String.WithCharacterSet = (characterSet) =>
-  new StringType('String', () => StringResolver.string({ ...defaults, characterSet }), { characterSet });
-
-
 // Type.Number = () => BasicTypes.ra;
 // Type.Boolean = () => Faker.random.boolean();
 // Type.UUID = () => Faker.random.uuid();
@@ -105,4 +58,4 @@ Type.String.WithCharacterSet = (characterSet) =>
 //   return this.idCounter;
 // };
 
-export default Type;
+// export default Type;
