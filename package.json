@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "webpack -w",
-    "test": "mocha --watch --recursive --require babel-core/register ./src/test/"
+    "test": "mocha --recursive --require babel-core/register ./src/test/"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
