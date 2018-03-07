@@ -1,4 +1,4 @@
-import { isManufacturer, isTypeObject } from './helpers/is';
+import { isManufacturer, isTypeObject, isFunction } from './helpers/is';
 import traverseObjectPairs from './helpers/traverseObjectPairs';
 import Type from './types/Type.Extend';
 
@@ -71,6 +71,8 @@ class Manufacturer {
     traverseObjectPairs(this.blueprint, (attr, obj) => {
       if (isTypeObject(obj)) {
         object[attr] = obj.resolver();
+      } else if (isFunction(obj)) {
+        object[attr] = obj();
       } else {
         object[attr] = obj;
       }

@@ -87,6 +87,18 @@ describe('ArrayType', () => {
         });
       });
     });
+
+    it('generate custom array', () => {
+      let i = 0;
+      const result = Manufacturer.define({
+        array: Type.ArrayOf(() => ++i).Length(10)
+      }).create();
+
+      result.should.have.property('array');
+      result.array.should.be.an.Array();
+      result.array.length.should.be.exactly(10);
+      result.array.should.be.deepEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    });
   });
 
   describe('Direct Expression', () => {

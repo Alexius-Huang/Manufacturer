@@ -1,13 +1,16 @@
-import { isTypeObject } from '../helpers/is';
+import { isTypeObject, isFunction } from '../helpers/is';
 
 export default function ArrayResolver(options = {
   length: 5,
   element: undefined
 }) {
   const { length, element } = options;
+  const result = Array.from(Array(length));
+
   if (isTypeObject(element)) {
-    return Array.from(Array(length)).map(() => element.resolver());
-  } else {
-    return Array.from(Array(length)).map(() => element);
+    return result.map(() => element.resolver());
+  } else if (isFunction(element)) {
+    return result.map(element);
   }
+  return result.map(() => element);
 }
