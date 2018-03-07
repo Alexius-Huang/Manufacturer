@@ -28,14 +28,15 @@ export default class BooleanType extends Type {
     };
 
     Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.As, {
-      ...switchProperties
-    });
+    Object.defineProperties(this.As, switchProperties);
+    Object.defineProperties(this.Be, switchProperties);
+
+    this.BindTraitsWithPrepositions(['Type', 'Probability', 'Truthy', 'Falsy']);
   }
 
   // Type(type) {
-  //   this.type = type || this.cache || defaults.type;
-  //   this.cache = null;
+  //   this.type = type || this.__cache__ || defaults.type;
+  //   this.__cache__ = null;
   //   this.resetResolver();
   //   return this;
   // }
@@ -44,20 +45,20 @@ export default class BooleanType extends Type {
   //   return this.Type(type);
   // }
 
-  Probability(num) {
-    this.probability = num || this.cache || defaults.probability;
-    this.cache = null;
-    this.resetResolver();
-    return this;
-  }
+  // Probability(num) {
+  //   this.probability = num || this.__cache__ || defaults.probability;
+  //   this.__cache__ = null;
+  //   this.resetResolver();
+  //   return this;
+  // }
 
-  WithProbability(num) {
-    return this.Probability(num);
-  }
+  // WithProbability(num) {
+  //   return this.Probability(num);
+  // }
 
   // Truthy(value) {
-  //   this.truthy = value || this.cache || defaults.truthy;
-  //   this.cache = null;
+  //   this.truthy = value || this.__cache__ || defaults.truthy;
+  //   this.__cache__ = null;
   //   this.resetResolver();
   //   return this;
   // }
@@ -69,17 +70,6 @@ export default class BooleanType extends Type {
   WithTruthyValue(value) {
     return this.Truthy(value);
   }
-
-  // Falsy(value) {
-  //   this.falsy = value || this.cache || defaults.falsy;
-  //   this.cache = null;
-  //   this.resetResolver();
-  //   return this;
-  // }
-
-  // WithFalsy(value) {
-  //   return this.Falsy(value);
-  // }
 
   WithFalsyValue(value) {
     return this.Falsy(value);

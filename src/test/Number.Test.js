@@ -120,8 +120,8 @@ describe('Number Type', () => {
     SharedTest['Creates Float within 990 and 1000'](
       Type.Number
         .With('float').As.Type
-        .With(1000).As.Maximum
-        .With(990).As.Minimum
+        .With(1000).Be.Maximum
+        .With(990).Be.Minimum
     );
   });
 

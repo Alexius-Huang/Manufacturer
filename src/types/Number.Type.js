@@ -39,12 +39,10 @@ export default class NumberType extends Type {
     };
 
     Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.As, {
-      Type: { get: () => this.Type(this.cache) },
-      Maximum: { get: () => this.Maximum(this.cache) },
-      Minimum: { get: () => this.Minimum(this.cache) },
-      ...switchProperties
-    });
+    Object.defineProperties(this.As, switchProperties);
+    Object.defineProperties(this.Be, switchProperties);
+
+    this.BindTraitsWithPrepositions(['Type', 'Maximum', 'Minimum']);
   }
 
   Between(min, max) {
@@ -59,8 +57,8 @@ export default class NumberType extends Type {
   }
 
   Maximum(max) {
-    this.max = max || this.cache || defaults.max;
-    this.cache = null;
+    this.max = max || this.__cache__ || defaults.max;
+    this.__cache__ = null;
     this.resetResolver();
     return this;
   }
@@ -70,8 +68,8 @@ export default class NumberType extends Type {
   }
 
   Minimum(min) {
-    this.min = min || this.cache || defaults.min;
-    this.cache = null;
+    this.min = min || this.__cache__ || defaults.min;
+    this.__cache__ = null;
     this.resetResolver();
     return this;
   }

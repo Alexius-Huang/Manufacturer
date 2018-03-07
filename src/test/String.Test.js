@@ -87,7 +87,7 @@ describe('StringType', () => {
 
     it('creates a string with 10 numeral characters only', () => {
       const PersonFactory = Manufacturer.define({
-        name: Type.String.With('1234567890').As.CharacterSet
+        name: Type.String.Let('1234567890').As.CharacterSet
       });
       const person = PersonFactory.create();
 
@@ -145,7 +145,7 @@ describe('StringType', () => {
 
       validate(
         Manufacturer.define({
-          name: Type.String.Of('1234567890').As.CharacterSet.With(15).Characters()
+          name: Type.String.Assign('1234567890').As.CharacterSet.With(15).Characters()
         }).create()
       );
     });

@@ -20,18 +20,14 @@ export default class LoremType extends Type {
     };
 
     Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.As, {
-      Unit: { get: () => this.Unit(this.cache) },
-      Number: { get: () => this.Number(this.cache) },
-      Words: { get: () => this.Words(this.cache) },
-      Sentences: { get: () => this.Sentences(this.cache) },
-      Paragraphs: { get: () => this.Paragraphs(this.cache) },
-      ...switchProperties
-    });
+    Object.defineProperties(this.As, switchProperties);
+    Object.defineProperties(this.Be, switchProperties);
+
+    this.BindTraitsWithPrepositions(['Unit', 'Number', 'Words', 'Sentences', 'Paragraphs']);
   }
 
   Words(number) {
-    this.unit = 'word';
+    this.switchMode('unit', 'word');
     return this.Number(number);
   }
 
@@ -40,7 +36,7 @@ export default class LoremType extends Type {
   }
 
   Sentences(number) {
-    this.unit = 'sentence';
+    this.switchMode('unit', 'sentence');
     return this.Number(number);
   }
 
@@ -49,7 +45,7 @@ export default class LoremType extends Type {
   }
 
   Paragraphs(number) {
-    this.unit = 'paragraph';
+    this.switchMode('unit', 'paragraph')
     return this.Number(number);
   }
 

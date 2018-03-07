@@ -29,3 +29,7 @@ export function isFunction(data) {
 export function isUndefined(data) {
   return typeof data === 'undefined';
 }
+
+export function isArray(data) {
+  return data instanceof Array;
+}

@@ -7,13 +7,14 @@ export default function BooleanResolver(options = {
 }) {
   const { type, probability, truthy, falsy, reversed } = options;
   const random = Math.random();
+  const returnTrue = random < (reversed ? 1 - probability : probability);
   switch (type) {
     case 'BOOLEAN_LOGIC':
-      return random < probability && !reversed ? true : false;
+      return returnTrue ? true : false;
     case 'DIGITAL_LOGIC':
-      return random < probability && !reversed ? 1 : 0;
+      return returnTrue ? 1 : 0;
     case 'CUSTOM_LOGIC':
-      return random < probability && !reversed ? truthy : falsy;
+      return returnTrue ? truthy : falsy;
     default:
       /* TODO: Throw error... */
       return false;

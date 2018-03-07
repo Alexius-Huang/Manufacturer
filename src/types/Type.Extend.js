@@ -3,10 +3,10 @@ import BooleanType from './Boolean.Type';
 import NumberType from './Number.Type';
 import StringType from './String.Type';
 
-Object.defineProperties(Type, {
-  Boolean: { get: () => new BooleanType() },
-  Number: { get: () => new NumberType() },
-  String: { get: () => new StringType() }
+Type.ExtendAsProperties({
+  Boolean: BooleanType,
+  Number: NumberType,
+  String: StringType
 });
 
 export default Type;

@@ -86,7 +86,7 @@ describe('LoremType', () => {
 
     it('creates text message by changing number and units', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.Number(2).Unit('sentence')
+        description: Type.String.Lorem.Number(2).And.Unit('sentence')
       });
       const person = PersonFactory.create();
 
@@ -105,6 +105,7 @@ describe('LoremType', () => {
       person.description.should.not.be.exactly('Lorem ipsum dolor sit amet.');
       (person.description.match(/\s/g) || []).length.should.be.exactly(4);
       person.description.split('. ').forEach(sentence => {
+        console.log(sentence);
         capitalizedRegex.test(sentence.split(' ')[0]).should.be.exactly(true);
       });
     });
@@ -122,7 +123,7 @@ describe('LoremType', () => {
 
     it('creates a 2-sentences text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.WithSentences(2)
+        description: Type.String.Lorem.Sentences(2)
       });
       const person = PersonFactory.create();
 
