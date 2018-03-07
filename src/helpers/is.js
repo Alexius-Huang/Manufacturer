@@ -7,7 +7,7 @@ export function isManufacturer(data) {
 }
 
 export function isTypeObject(data) {
-  return data && data.constructor && data.constructor.name === 'Type';
+  return data && data.__isTypeObject__;
 }
 
 export function isNumber(data) {

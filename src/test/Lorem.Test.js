@@ -105,7 +105,6 @@ describe('LoremType', () => {
       person.description.should.not.be.exactly('Lorem ipsum dolor sit amet.');
       (person.description.match(/\s/g) || []).length.should.be.exactly(4);
       person.description.split('. ').forEach(sentence => {
-        console.log(sentence);
         capitalizedRegex.test(sentence.split(' ')[0]).should.be.exactly(true);
       });
     });

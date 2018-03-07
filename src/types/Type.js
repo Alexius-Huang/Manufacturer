@@ -74,8 +74,8 @@ export default class Type {
     };
   }
 
-  static ExtendAsProperty(title, TypeClass) {
-    Object.defineProperty(this, title, { get: () => new TypeClass() });
+  static ExtendAsProperty(title, getter) {
+    Object.defineProperty(this, title, { get: getter });
   }
 
   static ExtendAsProperties(object) {
@@ -85,7 +85,14 @@ export default class Type {
         result[title] = { get: () => new object[title]() };
         return result;
       }, {})
-    )
+    );
+  }
+
+  static ExtendAsClassMethods(object) {
+    Object.keys(object).forEach(title => {
+      const callback = object[title];
+      this[title] = callback;
+    });
   }
 
   BindActivePrepositionMethods() {

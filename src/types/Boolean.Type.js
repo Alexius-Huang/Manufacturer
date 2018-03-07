@@ -34,39 +34,6 @@ export default class BooleanType extends Type {
     this.BindTraitsWithPrepositions(['Type', 'Probability', 'Truthy', 'Falsy']);
   }
 
-  // Type(type) {
-  //   this.type = type || this.__cache__ || defaults.type;
-  //   this.__cache__ = null;
-  //   this.resetResolver();
-  //   return this;
-  // }
-
-  // WithType(type) {
-  //   return this.Type(type);
-  // }
-
-  // Probability(num) {
-  //   this.probability = num || this.__cache__ || defaults.probability;
-  //   this.__cache__ = null;
-  //   this.resetResolver();
-  //   return this;
-  // }
-
-  // WithProbability(num) {
-  //   return this.Probability(num);
-  // }
-
-  // Truthy(value) {
-  //   this.truthy = value || this.__cache__ || defaults.truthy;
-  //   this.__cache__ = null;
-  //   this.resetResolver();
-  //   return this;
-  // }
-
-  // WithTruthy(value) {
-  //   return this.Truthy(value);
-  // }
-
   WithTruthyValue(value) {
     return this.Truthy(value);
   }

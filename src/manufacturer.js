@@ -61,10 +61,8 @@ class Manufacturer {
 
     /* Traverse each attribute and create data according to blueprint */
     traverseObjectPairs(this.blueprint, (attr, obj) => {
-      if (isManufacturer(obj)) {
-        object[attr] = obj.create();
-      } else if (obj.__isTypeObject__) {
-        object[attr] = (obj.resolver.bind(this))();
+      if (isTypeObject(obj)) {
+        object[attr] = obj.resolver();
       } else {
         object[attr] = obj;
       }
