@@ -1,46 +1,40 @@
-// const Manufacturer = require('./build/manufacturer.bundle.js');
 import Manufacturer from '../manufacturer';
-const Type = Manufacturer.Type;
+import should from 'should';
 
-// console.log(Type);
-const Person =
-  Manufacturer
-    .define({
-      name: Type.String.With(10).As.Characters,
-      age: Type.Number
-        .With('integer').As.Type
-        .Negative.Between(1, 100),
-      // married: Type.Boolean,
-      // interest: Type.OneOf(['Eating', 'Coding', 'Sleeping'])
+const { Type } = Manufacturer;
+
+describe('Manufacturer', () => {
+  describe('#extend', () => {
+    beforeEach(function() {
+      this.Person = Manufacturer.define({
+        name: Type.String,
+        age: Type.Number.Positive.Integer.Between(18, 100)
+      });
     });
 
-// const Product =
-//   Manufacturer
-//     .define({
-//       name: Type.String,
-//       price: Type.Random.Between(0.01, 100),
-//       produceDate: Type.Time.Now('YYYY-MM-DD'),
-//       expirationDate: Type.Time.After(14, 'days', 'YYYY-MM-DD')
-//     });
+    it('extends the factory and create object according to the extended blueprint', function() {
+      const Engineer = Manufacturer.define({ occupation: 'Engineer' });
+      const engineer = this.Person.extend(Engineer).create();
 
-const Store =
-  Manufacturer
-    .define({
-      name: Type.String.Of(5).Characters().WithCharacterSet('AbCdE'),
-      description:
-        // Type.String.Lorem.Sentences(5),
-        // Type.String.Lorem.WithSentences(5),
-        // Type.String.Lorem.Of(5).Sentences(),
-        Type.String.Lorem.Of(5).Random.Sentences(),
-        // Type.String.Lorem.With(5).Sentences(),
-        // Type.String.Lorem.With(5).Random.Sentences(),
-        // Type.String.Lorem.With(5).As.Sentences,
-        // Type.String.Lorem.Of(5).As.Sentences,
-        // Type.String.Lorem.With(5).As.Number,
-
-        //category: Type.OneOf(['Food & Drinks', 'Electronics', 'Furniture']),
-      owner: Person,
-//       products: Type.ArrayOf(Product)
+      engineer.should.have.property('name');
+      engineer.name.should.be.a.String();
+      engineer.should.have.property('age');
+      engineer.age.should.be.a.Number().and.within(18, 100);
+      engineer.should.have.property('occupation', 'Engineer');
     });
 
-console.log(Store.create());
+    it('extends the factory and create object which can be overwritten by extended property', function() {
+      const Student = Manufacturer.define({
+        occupation: 'Student',
+        age: Type.Number.Positive.Integer.Within(9, 21)
+      });
+      const student = this.Person.extend(Student).create();
+
+      student.should.have.property('name');
+      student.name.should.be.a.String();
+      student.should.have.property('age');
+      student.age.should.be.a.Number().and.within(9, 21);
+      student.should.have.property('occupation', 'Student');      
+    });
+  })
+});

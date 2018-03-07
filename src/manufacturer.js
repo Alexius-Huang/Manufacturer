@@ -40,6 +40,14 @@ class Manufacturer {
     return this;
   }
 
+  extend(factory) {
+    if (isManufacturer(factory)) {
+      this.blueprint = { ...this.blueprint, ...factory.blueprint };
+      return this;
+    }
+    throw new Error(`Should extend Manufacturer with another Manufacturer Object. Got: ${factory}`);
+  }
+
   create(...args) {
     this.idCounter += 1;
 

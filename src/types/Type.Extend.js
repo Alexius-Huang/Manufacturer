@@ -13,7 +13,9 @@ Type.ExtendAsProperties({
 });
 
 Type.ExtendAsClassMethods({
-  ArrayOf: something => new ArrayType({ element: something })
+  ArrayOf: something => new ArrayType({ element: something }),
+  // TODO: Implement OneOf from EnumType...
+  // OneOf: arrayOfValues => new EnumType({ values: arrayOfValues })
 });
 
 export default Type;

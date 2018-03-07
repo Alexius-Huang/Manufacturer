@@ -4,6 +4,7 @@ if ( ! Math.between) {
   Math.between = (min, max) => Math.random() * (max - min) + min;
 }
 
+/* TODO: Implement error checking for contradictory logic */
 export default function NumberResolver(options = {
   type: 'integer',
   max: 10000,
@@ -21,7 +22,7 @@ export default function NumberResolver(options = {
       min = min || -max;
     } else {
       /* Absolute Positive case */
-      min = zero ? 0 : 1;
+      min = min || (zero ? 0 : 1);
     }
   } else {
     /* Absolute negative case */
