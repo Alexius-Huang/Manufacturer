@@ -120,6 +120,18 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
+/***/ "./src/helpers/uuid.js":
+/*!*****************************!*\
+  !*** ./src/helpers/uuid.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = uuid;\n// See: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript\n\nfunction uuid() {\n  var d = Date.now();\n  if (typeof performance !== 'undefined' && typeof performance.now === 'function') {\n    d += performance.now();\n  }\n  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {\n    var r = (d + Math.random() * 16) % 16 | 0;\n    d = Math.floor(d / 16);\n    return (c === 'x' ? r : r & 0x3 | 0x8).toString(16);\n  });\n}\n\n//# sourceURL=webpack://Manufacturer/./src/helpers/uuid.js?");
+
+/***/ }),
+
 /***/ "./src/lorem/lorem.js":
 /*!****************************!*\
   !*** ./src/lorem/lorem.js ***!
@@ -332,7 +344,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _Type = __webpack_require__(/*! ./Type */ \"./src/types/Type.js\");\n\nvar _Type2 = _interopRequireDefault(_Type);\n\nvar _Array = __webpack_require__(/*! ./Array.Type */ \"./src/types/Array.Type.js\");\n\nvar _Array2 = _interopRequireDefault(_Array);\n\nvar _Boolean = __webpack_require__(/*! ./Boolean.Type */ \"./src/types/Boolean.Type.js\");\n\nvar _Boolean2 = _interopRequireDefault(_Boolean);\n\nvar _Group = __webpack_require__(/*! ./Group.Type */ \"./src/types/Group.Type.js\");\n\nvar _Group2 = _interopRequireDefault(_Group);\n\nvar _Number = __webpack_require__(/*! ./Number.Type */ \"./src/types/Number.Type.js\");\n\nvar _Number2 = _interopRequireDefault(_Number);\n\nvar _String = __webpack_require__(/*! ./String.Type */ \"./src/types/String.Type.js\");\n\nvar _String2 = _interopRequireDefault(_String);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n_Type2.default.ExtendAsProperties({\n  Array: function Array() {\n    return new _Array2.default();\n  },\n  Boolean: function Boolean() {\n    return new _Boolean2.default();\n  },\n  Group: function Group() {\n    return new _Group2.default();\n  },\n  Number: function Number() {\n    return new _Number2.default();\n  },\n  String: function String() {\n    return new _String2.default();\n  }\n});\n\n_Type2.default.ExtendAsClassMethods({\n  ArrayOf: function ArrayOf(something) {\n    return new _Array2.default({ element: something });\n  },\n  GroupOf: function GroupOf(arrayOfValues) {\n    return new _Group2.default({ values: arrayOfValues });\n  },\n  OneOf: function OneOf(arrayOfValues) {\n    return new _Group2.default({ values: arrayOfValues, sample: 1 });\n  }\n});\n\nexports.default = _Type2.default;\n\n//# sourceURL=webpack://Manufacturer/./src/types/Type.Extend.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _Type = __webpack_require__(/*! ./Type */ \"./src/types/Type.js\");\n\nvar _Type2 = _interopRequireDefault(_Type);\n\nvar _Array = __webpack_require__(/*! ./Array.Type */ \"./src/types/Array.Type.js\");\n\nvar _Array2 = _interopRequireDefault(_Array);\n\nvar _Boolean = __webpack_require__(/*! ./Boolean.Type */ \"./src/types/Boolean.Type.js\");\n\nvar _Boolean2 = _interopRequireDefault(_Boolean);\n\nvar _Group = __webpack_require__(/*! ./Group.Type */ \"./src/types/Group.Type.js\");\n\nvar _Group2 = _interopRequireDefault(_Group);\n\nvar _Number = __webpack_require__(/*! ./Number.Type */ \"./src/types/Number.Type.js\");\n\nvar _Number2 = _interopRequireDefault(_Number);\n\nvar _String = __webpack_require__(/*! ./String.Type */ \"./src/types/String.Type.js\");\n\nvar _String2 = _interopRequireDefault(_String);\n\nvar _uuid = __webpack_require__(/*! ../helpers/uuid */ \"./src/helpers/uuid.js\");\n\nvar _uuid2 = _interopRequireDefault(_uuid);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n_Type2.default.ExtendAsProperties({\n  Array: function Array() {\n    return new _Array2.default();\n  },\n  Boolean: function Boolean() {\n    return new _Boolean2.default();\n  },\n  Group: function Group() {\n    return new _Group2.default();\n  },\n  Number: function Number() {\n    return new _Number2.default();\n  },\n  String: function String() {\n    return new _String2.default();\n  },\n  UUID: function UUID() {\n    return _uuid2.default;\n  }\n});\n\n_Type2.default.ExtendAsClassMethods({\n  ArrayOf: function ArrayOf(something) {\n    return new _Array2.default({ element: something });\n  },\n  GroupOf: function GroupOf(arrayOfValues) {\n    return new _Group2.default({ values: arrayOfValues });\n  },\n  OneOf: function OneOf(arrayOfValues) {\n    return new _Group2.default({ values: arrayOfValues, sample: 1 });\n  }\n});\n\nexports.default = _Type2.default;\n\n//# sourceURL=webpack://Manufacturer/./src/types/Type.Extend.js?");
 
 /***/ }),
 

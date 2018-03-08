@@ -6,12 +6,15 @@ import GroupType from './Group.Type';
 import NumberType from './Number.Type';
 import StringType from './String.Type';
 
+import uuid from '../helpers/uuid';
+
 Type.ExtendAsProperties({
   Array: () => new ArrayType(),
   Boolean: () => new BooleanType(),
   Group: () => new GroupType(),
   Number: () => new NumberType(),
-  String: () => new StringType()
+  String: () => new StringType(),
+  UUID: () => uuid
 });
 
 Type.ExtendAsClassMethods({
