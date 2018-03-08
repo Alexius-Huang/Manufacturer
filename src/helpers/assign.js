@@ -2,6 +2,9 @@ import * as _ from './is';
 
 export default function assign(type, defaultValue, value) {
   switch (type) {
+    case 'array':
+      if (_.isArray(value)) return value;
+      return defaultValue;
     case 'boolean':
       if (_.isBoolean(value)) return value;
       return defaultValue;
