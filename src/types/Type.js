@@ -9,7 +9,7 @@ if (!String.prototype.capitalize) {
 export default class Type {
   constructor(title, resolver) {
     this.title = title;
-    this.resolver = resolver;
+    this.resolver = resolver || (this.constuctor || this.constructor.resolver);
 
     /* Prepositions */
     this.As = {};
@@ -22,9 +22,10 @@ export default class Type {
     this.__passive_prepositions__ = [this.As, this.Be];
     this.__conjunct_prepositions__ = ['And', 'A', 'An', 'To'];
 
-    this.BindActivePrepositionMethods();
-    this.BindPassivePrepositionMethods();
-    this.BindConjunctPrepositionMethods();
+    this
+      .BindActivePrepositionMethods()
+      .BindPassivePrepositionMethods()
+      .BindConjunctPrepositionMethods();
   }
 
   activate(trait) {
@@ -43,7 +44,11 @@ export default class Type {
   }
 
   resolve() {
-    return this.resolver(this);
+    if (this.resolver) {
+      return this.resolver(this);
+    }
+
+    return new Error(`\`${this.constructor.name}\` requires a resolver to generate data, you can provide a function which returns a value and set by class method: \`UseResolver\``);
   }
 
   static DefineBuiltInTrait(traitName, defaultValue) {
@@ -106,10 +111,13 @@ export default class Type {
         return this;
       };
     });
+
+    return this;
   }
 
   BindPassivePrepositionMethods() {
     /* WIP... */
+    return this;
   }
 
   BindConjunctPrepositionMethods() {
@@ -120,6 +128,8 @@ export default class Type {
         return object;
       }, {})
     );
+
+    return this;
   }
 
   BindTraitsWithPrepositions(traitInput) {
@@ -140,5 +150,7 @@ export default class Type {
         Object.defineProperties(preposition, definePropertiesObject);
       });
     }
+
+    return this;
   }
 }

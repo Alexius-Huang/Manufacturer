@@ -2,6 +2,7 @@ import Type from './Type';
 
 import ArrayType from './Array.Type';
 import BooleanType from './Boolean.Type';
+import DateType from './Date.Type';
 import GroupType from './Group.Type';
 import NumberType from './Number.Type';
 import StringType from './String.Type';
@@ -12,6 +13,7 @@ Type
   .ExtendAsProperties({
     Array: () => new ArrayType(),
     Boolean: () => new BooleanType(),
+    Date: () => new DateType(),
     Group: () => new GroupType(),
     Number: () => new NumberType(),
     String: () => new StringType(),
