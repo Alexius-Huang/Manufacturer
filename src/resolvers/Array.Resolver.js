@@ -8,7 +8,7 @@ export default function ArrayResolver(options = {
   const result = Array.from(Array(length));
 
   if (isTypeObject(element)) {
-    return result.map(() => element.resolver());
+    return result.map(() => element.resolve());
   } else if (isFunction(element)) {
     return result.map(element);
   }

@@ -19,7 +19,9 @@ describe('BooleanType', () => {
     booleanType.should.have.property('falsy');
     booleanType.should.have.property('reversed');
     booleanType.constructor.name.should.be.exactly('BooleanType');
-    booleanType.should.not.be.exactly(Type.Boolean);    
+    booleanType.should.not.be.exactly(Type.Boolean);
+    
+    booleanType.resolve().should.be.oneOf([true, false]);
   });
 
   describe('default', () => {

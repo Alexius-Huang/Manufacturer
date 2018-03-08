@@ -11,7 +11,7 @@ export default function GroupResolver(options = {
   if (isArray(values)) {
     result = [...values];
   } else if (isTypeObject(values) && values.constructor.name === 'ArrayType') {
-    result = values.resolver();
+    result = values.resolve();
   } else {
     throw new Error(`Values in GroupType accepts Array or ArrayType object. Got: ${typeof values}`);
   }

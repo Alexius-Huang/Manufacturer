@@ -24,8 +24,6 @@ export default class GroupType extends Type {
     Object.defineProperties(this.Be, switchProperties);
 
     this.BindTraitsWithPrepositions(['Values', 'Sample']);
-
-    this.resetResolver();
   }
 }
 

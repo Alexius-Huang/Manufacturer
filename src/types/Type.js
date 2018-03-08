@@ -29,20 +29,21 @@ export default class Type {
 
   activate(trait) {
     this[trait] = true;
-    this.resetResolver();
     return this;
   }
 
   deactivate(trait) {
     this[trait] = false;
-    this.resetResolver();
     return this;
   }
 
   switchMode(trait, value) {
     this[trait] = value;
-    this.resetResolver();
     return this;
+  }
+
+  resolve() {
+    return this.resolver(this);
   }
 
   static DefineBuiltInTrait(traitName, defaultValue) {
@@ -58,7 +59,6 @@ export default class Type {
         this[traitName] = defaultValue;
       }
       this.__cache__ = undefined;
-      this.resetResolver();
       return this;
     };
 
@@ -66,16 +66,18 @@ export default class Type {
     this.prototype[`With${capitalizedTraitName}`] = function(traitInputValue) {
       return this[capitalizedTraitName](traitInputValue);
     };
+
+    return this;
   }
 
   static UseResolver(resolver) {
-    this.prototype.resetResolver = function() {
-      this.resolver = () => resolver(this);
-    };
+    this.resolver = resolver;
+    return this;
   }
 
   static ExtendAsProperty(title, getter) {
     Object.defineProperty(this, title, { get: getter });
+    return this;
   }
 
   static ExtendAsProperties(object) {
@@ -86,6 +88,7 @@ export default class Type {
         return result;
       }, {})
     );
+    return this;
   }
 
   static ExtendAsClassMethods(object) {
@@ -93,6 +96,7 @@ export default class Type {
       const callback = object[title];
       this[title] = callback;
     });
+    return this;
   }
 
   BindActivePrepositionMethods() {

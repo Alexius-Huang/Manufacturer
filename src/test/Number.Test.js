@@ -44,6 +44,9 @@ describe('Number Type', () => {
     numberType.should.have.property('zero');
     numberType.constructor.name.should.be.exactly('NumberType');
     numberType.should.not.be.exactly(Type.String);
+
+    numberType.resolve().should.be.within(-10000, 10000);
+    (numberType.resolve() % 1).should.be.exactly(0);
   });
 
   describe('Default', () => {

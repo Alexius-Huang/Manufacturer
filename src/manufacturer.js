@@ -70,7 +70,7 @@ class Manufacturer {
     /* Traverse each attribute and create data according to blueprint */
     traverseObjectPairs(this.blueprint, (attr, obj) => {
       if (isTypeObject(obj)) {
-        object[attr] = obj.resolver();
+        object[attr] = obj.resolve();
       } else if (isFunction(obj)) {
         object[attr] = obj();
       } else {

@@ -58,6 +58,8 @@ describe('GroupType', () => {
     groupType.should.have.property('sample');
     groupType.constructor.name.should.be.exactly('GroupType');
     groupType.should.not.be.exactly(Type.Group);
+
+    groupType.resolve().should.be.deepEqual([]);
   });
 
   describe('Default', () => {

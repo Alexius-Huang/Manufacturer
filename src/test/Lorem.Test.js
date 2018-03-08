@@ -39,6 +39,8 @@ describe('LoremType', () => {
     loremType.should.have.property('number');
     loremType.constructor.name.should.be.exactly('LoremType');
     loremType.should.not.be.exactly(Type.String.Lorem);
+
+    loremType.resolve().should.be.exactly('Lorem ipsum dolor sit amet.');
   });
 
   describe('default', () => {

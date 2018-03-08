@@ -22,6 +22,9 @@ describe('StringType', () => {
     stringType.should.have.property('characterSet');
     stringType.constructor.name.should.be.exactly('StringType');
     stringType.should.not.be.exactly(Type.String);
+
+    stringType.resolve().should.be.a.String();
+    stringType.resolve().length.should.be.exactly(10);
   });
 
   describe('default', () => {

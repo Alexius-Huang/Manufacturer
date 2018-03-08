@@ -48,7 +48,6 @@ export default class NumberType extends Type {
   Between(min, max) {
     this.min = min || defaults.min;
     this.max = max || defaults.max;
-    this.resetResolver();
     return this;
   }
 
@@ -59,7 +58,6 @@ export default class NumberType extends Type {
   Maximum(max) {
     this.max = max || this.__cache__ || defaults.max;
     this.__cache__ = null;
-    this.resetResolver();
     return this;
   }
 
@@ -70,7 +68,6 @@ export default class NumberType extends Type {
   Minimum(min) {
     this.min = min || this.__cache__ || defaults.min;
     this.__cache__ = null;
-    this.resetResolver();
     return this;
   }
 

@@ -27,6 +27,8 @@ describe('ArrayType', () => {
     arrayType.should.have.property('element');
     arrayType.constructor.name.should.be.exactly('ArrayType');
     arrayType.should.not.be.exactly(Type.Array);
+
+    arrayType.resolve().should.be.deepEqual(Array.from(Array(5)).map(() => undefined));
   });
 
   describe('default', () => {
@@ -38,7 +40,7 @@ describe('ArrayType', () => {
       result.should.have.property('array');
       result.array.should.be.an.Array();
       result.array.length.should.be.exactly(5);
-      result.array.should.be.deepEqual([undefined, undefined, undefined, undefined, undefined]);
+      result.array.should.be.deepEqual(Array.from(Array(5)).map(() => undefined));
     });
   });
 
