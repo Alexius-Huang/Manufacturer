@@ -2,15 +2,17 @@
 
 ## A JavaScript Factory Pattern Implementation
 
+[![Build Status](https://travis-ci.org/Maxwell-Alexius/Manufacturer.svg?branch=master)](https://travis-ci.org/Maxwell-Alexius/Manufacturer)
+
 ```js
 import Manufacturer from 'manufacturer';
-const Type = Manufacturer.Type;
+const { Type } = Manufacturer;
 
 const Person =
   Manufacturer
     .define({
       name: Type.String,
-      age: Type.Random.Integer.Between(18, 90),
+      age: Type.Number.Positive.Integer.Between(18, 90),
       married: Type.Boolean,
       interest: Type.OneOf(['Eating', 'Coding', 'Sleeping'])
     });
@@ -19,8 +21,8 @@ const Product =
   Manufacturer
     .define({
       name: Type.String,
-      price: Type.Random.Between(0.01, 100),
-      produceDate: Type.Time.Now('YYYY-MM-DD'),
+      price: Type.Number.Positive.Float.Between(0.01, 100),
+      produceDate: Type.Time.Format('YYYY-MM-DD'),
       expirationDate: Type.Time.After(14, 'days', 'YYYY-MM-DD')
     });
 
