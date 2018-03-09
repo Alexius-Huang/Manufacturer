@@ -1,42 +1,5 @@
+import '../helpers/string.polyfill';
 import { isNumber } from '../helpers/is';
-
-// https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
-if (!String.prototype.padStart) {
-  String.prototype.padStart = function padStart(targetLength, padString) {
-    targetLength = targetLength >> 0; //truncate if number or convert non-number to 0;
-    padString = String((typeof padString !== 'undefined' ? padString : ' '));
-    if (this.length > targetLength) {
-      return String(this);
-    }
-    else {
-      targetLength = targetLength - this.length;
-      if (targetLength > padString.length) {
-        padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
-      }
-      return padString.slice(0, targetLength) + String(this);
-    }
-  };
-}
-
-// https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
-if (!String.prototype.padEnd) {
-  String.prototype.padEnd = function padEnd(targetLength, padString) {
-    targetLength = targetLength >> 0; //floor if number or convert non-number to 0;
-    padString = String((typeof padString !== 'undefined' ? padString : ' '));
-    if (this.length > targetLength) {
-      return String(this);
-    }
-    else {
-      targetLength = targetLength - this.length;
-      if (targetLength > padString.length) {
-        padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
-      }
-      return String(this) + padString.slice(0, targetLength);
-    }
-  };
-}
 
 export default function DateResolver(options = {
   startTime: null,
@@ -102,7 +65,7 @@ export default function DateResolver(options = {
     /* Meridiem AM / PM */
     const isAM = hours < 12;
     const a = isAM ? 'a.m.' : 'p.m.';
-    const A = isAM ? 'A.M.' : 'A.M.';
+    const A = isAM ? 'A.M.' : 'P.M.';
     const aa = isAM ? 'am' : 'pm';
     const AA = isAM ? 'AM' : 'PM'; 
 
@@ -153,22 +116,20 @@ export default function DateResolver(options = {
           continue;
         }
 
-        let parsedResult = token.content.split(splitFormat);
-        let valueAtStart = parsedResult[0] === '';
-        let valueAtEnd = parsedResult[parsedResult.length - 1] === '';
-
-        parsedResult = parsedResult
-          .filter(subString => subString !== '')
+        let parsedResult = token.content
+          .split(splitFormat)
           .reduce((acc, cur) => {
-            acc.push({ parsed: false, content: cur });
-            acc.push({ parsed: true, content: value });
+            if (cur === '') {
+              acc.push({ parsed: true, content: value })
+            } else {
+              acc.push({ parsed: false, content: cur });
+              acc.push({ parsed: true, content: value });
+            }
             return acc;
           }, []);
 
         parsedResult.pop();
 
-        if (valueAtStart) parsedResult.unshift({ parsed: true, content: value });
-        if (valueAtEnd) parsedResult.push({ parsed: true, content: value });
         newFormat = newFormat.concat(parsedResult);
       }
 
