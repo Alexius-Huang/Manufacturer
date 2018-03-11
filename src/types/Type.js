@@ -1,4 +1,4 @@
-import { isString, isArray, isUndefined } from '../helpers/is';
+import { isString, isArray, isUndefined, isFunction } from '../helpers/is';
 
 if (!String.prototype.capitalize) {
   String.prototype.capitalize = function () {
@@ -88,10 +88,13 @@ export default class Type {
   static ExtendAsProperties(object) {
     Object.defineProperties(
       this,
-      Object.keys(object).reduce((result, title) => {
-        result[title] = { get: () => new object[title]() };
-        return result;
-      }, {})
+      Object.keys(object).reduce(
+        (result, title) => ({
+          ...result,
+          [title]: { get: () => new object[title]() }
+        }),
+        {}
+      )
     );
     return this;
   }
@@ -123,13 +126,42 @@ export default class Type {
   BindConjunctPrepositionMethods() {
     Object.defineProperties(
       this,
-      this.__conjunct_prepositions__.reduce((object, preposition) => {
-        object[preposition] = { get: () => this };
-        return object;
-      }, {})
+      this.__conjunct_prepositions__.reduce(
+        (object, preposition) => ({
+          ...object,
+          [preposition]: { get: () => this }
+        }),
+        {}
+      )
     );
 
     return this;
+  }
+
+  BindAsProperty(title, getterFunction) {
+    const getterObject = { get: getterFunction };
+    Object.defineProperty(this, title, getterObject);
+    this.__passive_prepositions__.forEach(preposition => {
+      Object.defineProperty(preposition, title, getterObject);
+    });
+  }
+
+  BindAsProperties(propertyObject) {
+    const properties = Object.keys(propertyObject);
+    const transformedPropertyObject = {};
+
+    properties.forEach(property => {
+      const propertyGetterFunction = propertyObject[property];
+      if (!isFunction(propertyGetterFunction)) {
+        throw new Error(`Should defined as getter function, instead got: ${typeof propertyGetterFunction}`);
+      }
+      transformedPropertyObject[property] = { get: propertyGetterFunction };
+    });
+
+    Object.defineProperties(this, transformedPropertyObject);
+    this.__passive_prepositions__.forEach(prepositions => {
+      Object.defineProperties(prepositions, transformedPropertyObject);
+    });
   }
 
   BindTraitsWithPrepositions(traitInput) {
@@ -140,11 +172,13 @@ export default class Type {
         });
       });
     } else if (isArray(traitInput)) {
-      const definePropertiesObject = {};
-      for (let i = 0; i < traitInput.length; i++) {
-        const trait = traitInput[i];
-        definePropertiesObject[trait] = { get: () => this[trait](this.cacche) };
-      }
+      const definePropertiesObject = traitInput.reduce(
+        (traitsObject, trait) => ({
+          ...traitsObject,
+          [trait]: { get: () => this[trait](this.cache) }
+        }),
+        {}
+      );
 
       this.__passive_prepositions__.forEach(preposition => {
         Object.defineProperties(preposition, definePropertiesObject);

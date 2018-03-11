@@ -15,14 +15,7 @@ export default class LoremType extends Type {
     this.random = assign('boolean', defaults.random, options.random);
     this.number = assign('number', defaults.number, options.number);
 
-    const switchProperties = {
-      Random: { get: () => this.activate('random') },
-    };
-
-    Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.as, switchProperties);
-    Object.defineProperties(this.be, switchProperties);
-
+    this.BindAsProperty('Random', () => this.activate('random'));
     this.BindTraitsWithPrepositions(['Unit', 'Number', 'Words', 'Sentences', 'Paragraphs']);
   }
 

@@ -15,14 +15,7 @@ export default class GroupType extends Type {
     this.shuffle = assign('boolean', defaults.shuffle, options.shuffle);
     this.sample = assign('number', defaults.sample, options.sample);
 
-    const switchProperties = {
-      Shuffle: { get: () => this.activate('shuffle') }
-    };
-
-    Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.as, switchProperties);
-    Object.defineProperties(this.be, switchProperties);
-
+    this.BindAsProperty('Shuffle', () => this.activate('shuffle'));
     this.BindTraitsWithPrepositions(['Values', 'Sample']);
   }
 }

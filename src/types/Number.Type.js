@@ -23,24 +23,18 @@ export default class NumberType extends Type {
     this.negative = assign('boolean', defaults.negative, options.negative);
     this.zero = assign('boolean', defaults.zero, options.zero);
 
-    const switchProperties = {
-      Positive: {
-        get: () => this
-          .activate('positive')
-          .deactivate('negative')
-      },
-      Negative: {
-        get: () => this
-          .activate('negative')
-          .deactivate('positive')
-      },
-      Integer: { get: () => this.switchMode('type', 'integer') },
-      Float: { get: () => this.switchMode('type', 'float') }
-    };
-
-    Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.as, switchProperties);
-    Object.defineProperties(this.be, switchProperties);
+    this.BindAsProperties({
+      Positive: () => this
+        .activate('positive')
+        .deactivate('negative')
+      ,
+      Negative: () => this
+        .activate('negative')
+        .deactivate('positive')
+      ,
+      Integer: () => this.switchMode('type', 'integer'),
+      Float: () => this.switchMode('type', 'float')
+    });
 
     this.BindTraitsWithPrepositions(['Type', 'Maximum', 'Minimum']);
   }

@@ -20,17 +20,12 @@ export default class BooleanType extends Type {
     this.falsy = assign('any', defaults.falsy, options.falsy);
     this.reversed = assign('boolean', defaults.reversed, options.reversed);
 
-    const switchProperties = {
-      BooleanLogic: { get: () => this.switchMode('type', 'BOOLEAN_LOGIC') },
-      DigitalLogic: { get: () => this.switchMode('type', 'DIGITAL_LOGIC') },
-      CustomLogic: { get: () => this.switchMode('type', 'CUSTOM_LOGIC') },
-      Reversed: { get: () => this.activate('reversed') }
-    };
-
-    Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.as, switchProperties);
-    Object.defineProperties(this.be, switchProperties);
-
+    this.BindAsProperties({
+      BooleanLogic: () => this.switchMode('type', 'BOOLEAN_LOGIC'),
+      DigitalLogic: () => this.switchMode('type', 'DIGITAL_LOGIC'),
+      CustomLogic: () => this.switchMode('type', 'CUSTOM_LOGIC'),
+      Reversed: () => this.activate('reversed')
+    });
     this.BindTraitsWithPrepositions(['Type', 'Probability', 'Truthy', 'Falsy']);
   }
 
