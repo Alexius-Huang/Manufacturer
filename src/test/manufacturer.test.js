@@ -5,9 +5,9 @@ const { Type } = Manufacturer;
 
 describe('Manufacturer', () => {
   describe('Class Methods', () => {
-    describe('.attributesFor', () => {
-      it('gets the attributes from `Type` object', () => {
-        class TestType extends Type {
+    describe('.attributesFor', function() {
+      before(function() {
+        this.TestType = class extends Type {
           constructor(override) {
             super('Test');
             this.attributes([
@@ -16,25 +16,17 @@ describe('Manufacturer', () => {
             ], override);
           }
         }
+      });
 
-        const attributes = Manufacturer.attributesFor(new TestType());
+      it('gets the attributes from `Type` object', function() {
+        const attributes = Manufacturer.attributesFor(new this.TestType());
         attributes.should.have.property('props1', 123);
         attributes.should.have.property('props2', 'hello');
       });
 
-      it('can create the same `Type` object from other `Type` object using Manufacturer.attributesFor', () => {
-        class TestType extends Type {
-          constructor(override) {
-            super('Test');
-            this.attributes([
-              { name: 'props1', type: 'number', default: 123 },
-              { name: 'props2', type: 'string', default: 'hello' }
-            ], override);
-          }
-        }
-
-        const attributes = Manufacturer.attributesFor(new TestType({ props2: 'world', props1: 456 }));
-        const sameKindOfType = new TestType(attributes);
+      it('can create the same `Type` object from other `Type` object using Manufacturer.attributesFor', function() {
+        const attributes = Manufacturer.attributesFor(new this.TestType({ props2: 'world', props1: 456 }));
+        const sameKindOfType = new this.TestType(attributes);
         const result = Manufacturer.attributesFor(sameKindOfType);
         result.should.have.property('props1', 456);
         result.should.have.property('props2', 'world');
