@@ -2,7 +2,7 @@
 
 ## A JavaScript Factory Pattern Implementation
 
-[![Build Status](https://travis-ci.org/Maxwell-Alexius/Manufacturer.svg?branch=master)](https://travis-ci.org/Maxwell-Alexius/Manufacturer)
+[![Build Status](https://travis-ci.org/Maxwell-Alexius/Manufacturer.svg?branch=master)](https://travis-ci.org/Maxwell-Alexius/Manufacturer) [![Maintainability](https://api.codeclimate.com/v1/badges/b7890341ed1eb01639b2/maintainability)](https://codeclimate.com/github/Maxwell-Alexius/Manufacturer/maintainability)
 
 ```js
 import Manufacturer from 'manufacturer';
