@@ -39,8 +39,8 @@ export default class NumberType extends Type {
     };
 
     Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.As, switchProperties);
-    Object.defineProperties(this.Be, switchProperties);
+    Object.defineProperties(this.as, switchProperties);
+    Object.defineProperties(this.be, switchProperties);
 
     this.BindTraitsWithPrepositions(['Type', 'Maximum', 'Minimum']);
   }
@@ -61,7 +61,7 @@ export default class NumberType extends Type {
     return this;
   }
 
-  WithMaximum(max) {
+  withMaximum(max) {
     return this.Maximum(max);
   }
 
@@ -71,7 +71,7 @@ export default class NumberType extends Type {
     return this;
   }
 
-  WithMinimum(min) {
+  withMinimum(min) {
     return this.Minimum(min);
   }
 }

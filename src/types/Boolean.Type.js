@@ -28,8 +28,8 @@ export default class BooleanType extends Type {
     };
 
     Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.As, switchProperties);
-    Object.defineProperties(this.Be, switchProperties);
+    Object.defineProperties(this.as, switchProperties);
+    Object.defineProperties(this.be, switchProperties);
 
     this.BindTraitsWithPrepositions(['Type', 'Probability', 'Truthy', 'Falsy']);
   }

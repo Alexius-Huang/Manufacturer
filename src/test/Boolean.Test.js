@@ -88,7 +88,7 @@ describe('BooleanType', () => {
     it('generates 1 or 0 value randomly with equal probability', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
-          boolean: Type.Boolean.WithType('DIGITAL_LOGIC')
+          boolean: Type.Boolean.withType('DIGITAL_LOGIC')
         }).create();
         result.should.have.property('boolean');
         result.boolean.should.be.a.Number();
@@ -100,9 +100,9 @@ describe('BooleanType', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
           boolean: Type.Boolean
-            .WithType('CUSTOM_LOGIC')
-            .WithTruthy('YES')
-            .WithFalsy('NO')
+            .withType('CUSTOM_LOGIC')
+            .withTruthy('YES')
+            .withFalsy('NO')
         }).create();
         result.should.have.property('boolean');
         result.boolean.should.be.a.String();
@@ -113,7 +113,7 @@ describe('BooleanType', () => {
     it('generates logic result `false` value absolutely with probability 0', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
-          boolean: Type.Boolean.WithProbability(0)
+          boolean: Type.Boolean.withProbability(0)
         }).create();
         result.should.have.property('boolean');
         result.boolean.should.be.a.Boolean();
@@ -126,7 +126,7 @@ describe('BooleanType', () => {
     it('generates 1 or 0 value randomly with equal probability', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
-          boolean: Type.Boolean.With('DIGITAL_LOGIC').As.Type
+          boolean: Type.Boolean.with('DIGITAL_LOGIC').as.Type
         }).create();
         result.should.have.property('boolean');
         result.boolean.should.be.a.Number();
@@ -138,9 +138,9 @@ describe('BooleanType', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
           boolean: Type.Boolean
-            .With('CUSTOM_LOGIC').As.Type.And
-            .With('YES').As.Truthy.And
-            .With('NO').As.Falsy
+            .with('CUSTOM_LOGIC').as.Type.and
+            .with('YES').as.Truthy.and
+            .with('NO').as.Falsy
         }).create();
         result.should.have.property('boolean');
         result.boolean.should.be.a.String();
@@ -151,7 +151,7 @@ describe('BooleanType', () => {
     it('generates logic result `false` value absolutely with probability 0', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
-          boolean: Type.Boolean.With(0).As.Probability
+          boolean: Type.Boolean.with(0).as.Probability
         }).create();
         result.should.have.property('boolean');
         result.boolean.should.be.a.Boolean();
@@ -164,7 +164,7 @@ describe('BooleanType', () => {
     it('generates 1 or 0 value randomly with equal probability', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
-          boolean: Type.Boolean.With('DIGITAL_LOGIC').Type()
+          boolean: Type.Boolean.with('DIGITAL_LOGIC').Type()
         }).create();
         result.should.have.property('boolean');
         result.boolean.should.be.a.Number();
@@ -176,9 +176,9 @@ describe('BooleanType', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
           boolean: Type.Boolean
-            .With('CUSTOM_LOGIC').Type().And
-            .With('YES').Truthy().And
-            .With('NO').Falsy()
+            .with('CUSTOM_LOGIC').Type().and
+            .with('YES').Truthy().and
+            .with('NO').Falsy()
         }).create();
         result.should.have.property('boolean');
         result.boolean.should.be.a.String();
@@ -189,7 +189,7 @@ describe('BooleanType', () => {
     it('generates logic result `false` value absolutely with probability 0', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
-          boolean: Type.Boolean.With(0).Probability()
+          boolean: Type.Boolean.with(0).Probability()
         }).create();
         result.should.have.property('boolean');
         result.boolean.should.be.a.Boolean();

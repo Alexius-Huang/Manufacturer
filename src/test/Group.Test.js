@@ -157,27 +157,27 @@ describe('GroupType', () => {
   describe('With-Trait Expression', () => {
     it('creates a group of values', function () {
       SharedTest['Creates Group of Fruits'](
-        Type.Group.WithValues(FRUITS)
+        Type.Group.withValues(FRUITS)
       );
     });
 
     it('creates a group of values using ArrayType object instance', function () {
       SharedTest['Creates Group of 5 Random Lorem Word'](
-        Type.Group.WithValues(
-          Type.ArrayOf(Type.String.Lorem.Random.WithWords(1))
+        Type.Group.withValues(
+          Type.ArrayOf(Type.String.Lorem.Random.withWords(1))
         )
       );
     });
 
     it('gets a sample from a group of values', function () {
       SharedTest['Get One Fruit from Group of Fruits'](
-        Type.Group.WithValues(FRUITS).WithSample(1)
+        Type.Group.withValues(FRUITS).withSample(1)
       );
     });
 
     it('gets 3 samples from a group of items', function () {
       SharedTest['Get 3 Fruits from Group of Fruits'](
-        Type.Group.WithValues(FRUITS).WithSample(3)
+        Type.Group.withValues(FRUITS).withSample(3)
       );
     });
   });
@@ -185,27 +185,27 @@ describe('GroupType', () => {
   describe('With-As Expression', () => {
     it('creates a group of values', function () {
       SharedTest['Creates Group of Fruits'](
-        Type.Group.With(FRUITS).As.Values
+        Type.Group.with(FRUITS).as.Values
       );
     });
 
     it('creates a group of values using ArrayType object instance', function () {
       SharedTest['Creates Group of 5 Random Lorem Word'](
-        Type.Group.With(
-          Type.ArrayOf(Type.String.Lorem.Random.WithWords(1))
-        ).As.Values
+        Type.Group.with(
+          Type.ArrayOf(Type.String.Lorem.Random.withWords(1))
+        ).as.Values
       );
     });
 
     it('gets a sample from a group of values', function () {
       SharedTest['Get One Fruit from Group of Fruits'](
-        Type.Group.With(FRUITS).As.Values.With(1).As.Sample
+        Type.Group.with(FRUITS).as.Values.with(1).as.Sample
       );
     });
 
     it('gets 3 samples from a group of items', function () {
       SharedTest['Get 3 Fruits from Group of Fruits'](
-        Type.Group.With(FRUITS).As.Values.With(3).As.Sample
+        Type.Group.with(FRUITS).as.Values.with(3).as.Sample
       );
     });
   });
@@ -213,27 +213,27 @@ describe('GroupType', () => {
   describe('With-Omit-As Expression', () => {
     it('creates a group of values', function () {
       SharedTest['Creates Group of Fruits'](
-        Type.Group.With(FRUITS).Values()
+        Type.Group.with(FRUITS).Values()
       );
     });
 
     it('creates a group of values using ArrayType object instance', function () {
       SharedTest['Creates Group of 5 Random Lorem Word'](
-        Type.Group.With(
-          Type.ArrayOf(Type.String.Lorem.Random.With(1).Words())
+        Type.Group.with(
+          Type.ArrayOf(Type.String.Lorem.Random.with(1).Words())
         ).Values()
       );
     });
 
     it('gets a sample from a group of values', function () {
       SharedTest['Get One Fruit from Group of Fruits'](
-        Type.Group.With(FRUITS).Values().With(1).Sample()
+        Type.Group.with(FRUITS).Values().with(1).Sample()
       );
     });
 
     it('gets 3 samples from a group of items', function () {
       SharedTest['Get 3 Fruits from Group of Fruits'](
-        Type.Group.With(FRUITS).Values().With(3).Sample()
+        Type.Group.with(FRUITS).Values().with(3).Sample()
       );
     });
   });

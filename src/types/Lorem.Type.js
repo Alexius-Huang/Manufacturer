@@ -20,8 +20,8 @@ export default class LoremType extends Type {
     };
 
     Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.As, switchProperties);
-    Object.defineProperties(this.Be, switchProperties);
+    Object.defineProperties(this.as, switchProperties);
+    Object.defineProperties(this.be, switchProperties);
 
     this.BindTraitsWithPrepositions(['Unit', 'Number', 'Words', 'Sentences', 'Paragraphs']);
   }
@@ -31,7 +31,7 @@ export default class LoremType extends Type {
     return this.Number(number);
   }
 
-  WithWords(number) {
+  withWords(number) {
     return this.Words(number);
   }
 
@@ -40,7 +40,7 @@ export default class LoremType extends Type {
     return this.Number(number);
   }
 
-  WithSentences(number) {
+  withSentences(number) {
     return this.Sentences(number);
   }
 
@@ -49,7 +49,7 @@ export default class LoremType extends Type {
     return this.Number(number);
   }
 
-  WithParagraphs(number) {
+  withParagraphs(number) {
     return this.Paragraphs(number);
   }
 

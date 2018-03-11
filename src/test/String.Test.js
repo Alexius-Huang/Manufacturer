@@ -61,7 +61,7 @@ describe('StringType', () => {
   describe('With-Trait Expression', () => {
     it('creates a string with 15 alphanumeral characters only', () => {
       const PersonFactory = Manufacturer.define({
-        name: Type.String.WithCharacters(15)
+        name: Type.String.withCharacters(15)
       });
       const person = PersonFactory.create();
 
@@ -70,7 +70,7 @@ describe('StringType', () => {
 
     it('creates a string with 10 numeral characters only', () => {
       const PersonFactory = Manufacturer.define({
-        name: Type.String.WithCharacterSet('1234567890')
+        name: Type.String.withCharacterSet('1234567890')
       });
       const person = PersonFactory.create();
 
@@ -81,7 +81,7 @@ describe('StringType', () => {
   describe('With-As Expression', () => {
     it('creates a string with 15 alphanumeral characters only', () => {
       const PersonFactory = Manufacturer.define({
-        name: Type.String.With(15).As.Characters
+        name: Type.String.with(15).as.Characters
       });
       const person = PersonFactory.create();
 
@@ -90,7 +90,7 @@ describe('StringType', () => {
 
     it('creates a string with 10 numeral characters only', () => {
       const PersonFactory = Manufacturer.define({
-        name: Type.String.Let('1234567890').As.CharacterSet
+        name: Type.String.let('1234567890').to.be.CharacterSet
       });
       const person = PersonFactory.create();
 
@@ -101,7 +101,7 @@ describe('StringType', () => {
   describe('With-Omit-As Expression', () => {
     it('creates a string with 15 alphanumeral characters only', () => {
       const PersonFactory = Manufacturer.define({
-        name: Type.String.With(15).Characters()
+        name: Type.String.with(15).Characters()
       });
       const person = PersonFactory.create();
 
@@ -110,7 +110,7 @@ describe('StringType', () => {
 
     it('creates a string with 10 numeral characters only', () => {
       const PersonFactory = Manufacturer.define({
-        name: Type.String.With('1234567890').CharacterSet()
+        name: Type.String.with('1234567890').CharacterSet()
       });
       const person = PersonFactory.create();
 
@@ -124,31 +124,31 @@ describe('StringType', () => {
 
       validate(
         Manufacturer.define({
-          name: Type.String.Characters(15).And.CharacterSet('1234567890')
+          name: Type.String.Characters(15).and.CharacterSet('1234567890')
         }).create()
       );
 
       validate(
         Manufacturer.define({
-          name: Type.String.WithCharacterSet('1234567890').And.WithCharacters(15)
+          name: Type.String.withCharacterSet('1234567890').and.withCharacters(15)
         }).create()
       );
 
       validate(
         Manufacturer.define({
-          name: Type.String.Of(15).Characters().With('1234567890').As.CharacterSet
+          name: Type.String.of(15).Characters().with('1234567890').as.CharacterSet
         }).create()
       );
 
       validate(
         Manufacturer.define({
-          name: Type.String.With('1234567890').CharacterSet().Of(15).As.Characters
+          name: Type.String.with('1234567890').CharacterSet().of(15).Characters()
         }).create()
       );
 
       validate(
         Manufacturer.define({
-          name: Type.String.Assign('1234567890').As.CharacterSet.With(15).Characters()
+          name: Type.String.assign('1234567890').as.CharacterSet.with(15).Characters()
         }).create()
       );
     });

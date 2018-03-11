@@ -12,15 +12,15 @@ export default class Type {
     this.resolver = resolver || (this.constuctor || this.constructor.resolver);
 
     /* Prepositions */
-    this.As = {};
-    this.Be = {};
+    this.as = {};
+    this.be = {};
 
     this.__cache__ = null;
     this.__isTypeObject__ = true;
 
-    this.__active_prepositions__ = ['With', 'Of', 'Assign', 'Use', 'Let', 'Generate', 'Produce'];
-    this.__passive_prepositions__ = [this.As, this.Be];
-    this.__conjunct_prepositions__ = ['And', 'A', 'An', 'To'];
+    this.__active_prepositions__ = ['with', 'of', 'assign', 'let'];
+    this.__passive_prepositions__ = [this.as, this.be];
+    this.__conjunct_prepositions__ = ['and', 'a', 'an', 'to'];
 
     this
       .BindActivePrepositionMethods()
@@ -68,7 +68,7 @@ export default class Type {
     };
 
     /* Define With-Trait Method */
-    this.prototype[`With${capitalizedTraitName}`] = function(traitInputValue) {
+    this.prototype[`with${capitalizedTraitName}`] = function (traitInputValue) {
       return this[capitalizedTraitName](traitInputValue);
     };
 

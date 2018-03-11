@@ -88,7 +88,7 @@ describe('LoremType', () => {
 
     it('creates text message by changing number and units', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.Number(2).And.Unit('sentence')
+        description: Type.String.Lorem.Number(2).and.Unit('sentence')
       });
       const person = PersonFactory.create();
 
@@ -115,7 +115,7 @@ describe('LoremType', () => {
   describe('With-Trait Expression', () => {
     it('creates a 10-words text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.WithWords(10)
+        description: Type.String.Lorem.withWords(10)
       });
       const person = PersonFactory.create();
 
@@ -124,7 +124,7 @@ describe('LoremType', () => {
 
     it('creates a 2-sentences text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.Sentences(2)
+        description: Type.String.Lorem.withSentences(2)
       });
       const person = PersonFactory.create();
 
@@ -133,7 +133,7 @@ describe('LoremType', () => {
 
     it('creates a 3-paragraph text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.WithParagraphs(3)
+        description: Type.String.Lorem.withParagraphs(3)
       });
       const person = PersonFactory.create();
 
@@ -142,7 +142,7 @@ describe('LoremType', () => {
 
     it('creates text message by changing number and units', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.WithNumber(2).WithUnit('sentence')
+        description: Type.String.Lorem.withNumber(2).withUnit('sentence')
       });
       const person = PersonFactory.create();
 
@@ -153,7 +153,7 @@ describe('LoremType', () => {
   describe('With-As Expression', () => {
     it('creates a 10-words text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.With(10).As.Words
+        description: Type.String.Lorem.with(10).as.Words
       });
       const person = PersonFactory.create();
 
@@ -162,7 +162,7 @@ describe('LoremType', () => {
 
     it('creates a 2-sentences text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.With(2).As.Sentences
+        description: Type.String.Lorem.with(2).as.Sentences
       });
       const person = PersonFactory.create();
 
@@ -171,7 +171,7 @@ describe('LoremType', () => {
 
     it('creates a 3-paragraph text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.With(3).As.Paragraphs
+        description: Type.String.Lorem.with(3).as.Paragraphs
       });
       const person = PersonFactory.create();
 
@@ -181,8 +181,8 @@ describe('LoremType', () => {
     it('creates text message by changing number and units', () => {
       const PersonFactory = Manufacturer.define({
         description: Type.String.Lorem
-          .With(2).As.Number
-          .With('sentence').As.Unit
+          .with(2).as.Number
+          .with('sentence').as.Unit
       });
       const person = PersonFactory.create();
 
@@ -193,7 +193,7 @@ describe('LoremType', () => {
   describe('With-Omit-As Expression', () => {
     it('creates a 10-words text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.With(10).Words()
+        description: Type.String.Lorem.with(10).Words()
       });
       const person = PersonFactory.create();
 
@@ -202,7 +202,7 @@ describe('LoremType', () => {
 
     it('creates a 2-sentences text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.With(2).Sentences()
+        description: Type.String.Lorem.with(2).Sentences()
       });
       const person = PersonFactory.create();
 
@@ -211,7 +211,7 @@ describe('LoremType', () => {
 
     it('creates a 3-paragraph text message', () => {
       const PersonFactory = Manufacturer.define({
-        description: Type.String.Lorem.With(3).Paragraphs()
+        description: Type.String.Lorem.with(3).Paragraphs()
       });
       const person = PersonFactory.create();
 
@@ -221,8 +221,8 @@ describe('LoremType', () => {
     it('creates text message by changing number and units', () => {
       const PersonFactory = Manufacturer.define({
         description: Type.String.Lorem
-          .With(2).Number()
-          .And.With('sentence').Unit()
+          .with(2).Number()
+          .and.with('sentence').Unit()
       });
       const person = PersonFactory.create();
 

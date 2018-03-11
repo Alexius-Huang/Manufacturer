@@ -20,8 +20,8 @@ export default class GroupType extends Type {
     };
 
     Object.defineProperties(this, switchProperties);
-    Object.defineProperties(this.As, switchProperties);
-    Object.defineProperties(this.Be, switchProperties);
+    Object.defineProperties(this.as, switchProperties);
+    Object.defineProperties(this.be, switchProperties);
 
     this.BindTraitsWithPrepositions(['Values', 'Sample']);
   }

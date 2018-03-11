@@ -113,27 +113,27 @@ describe('Number Type', () => {
   describe('With-Trait Expression', () => {
     SharedTest['Creates Float within 990 and 1000'](
       Type.Number
-        .WithType('float')
-        .WithMaximum(1000)
-        .WithMinimum(990)
+        .withType('float')
+        .withMaximum(1000)
+        .withMinimum(990)
     );
   });
 
   describe('With-As Expression', () => {
     SharedTest['Creates Float within 990 and 1000'](
       Type.Number
-        .With('float').As.Type
-        .With(1000).Be.Maximum
-        .With(990).Be.Minimum
+        .with('float').as.Type
+        .with(1000).be.Maximum
+        .with(990).be.Minimum
     );
   });
 
   describe('With-Omit-As Expression', () => {
     SharedTest['Creates Float within 990 and 1000'](
       Type.Number
-        .With('float').Type()
-        .With(1000).Maximum()
-        .With(990).Minimum()
+        .with('float').Type()
+        .with(1000).Maximum()
+        .with(990).Minimum()
     );
   });
 
@@ -141,7 +141,7 @@ describe('Number Type', () => {
     it ('creates Negative Float only which ranged between -1000 and 0', () => {
       repeat(10, () => {
         const result = Manufacturer.define({
-          number: Type.Number.Negative.Float.With(1000).As.Maximum
+          number: Type.Number.Negative.Float.with(1000).as.Maximum
         }).create();
         result.should.have.property('number');
         SharedTest['Number Within'](result, [-1000, 0]);

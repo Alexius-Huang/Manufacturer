@@ -115,25 +115,25 @@ describe('ArrayType', () => {
 
   describe('With-Trait Expression', () => {
     SharedTest['Generates an Array with 3 Negative Numbers Ranged from 1 ~ 3'](
-      Type.Array.WithElement(
+      Type.Array.withElement(
         Type.Number.Negative.Integer.Between(1, 3)
-      ).WithLength(3)
+      ).withLength(3)
     );
   });
 
   describe('With-As Expression', () => {
     SharedTest['Generates an Array with 3 Negative Numbers Ranged from 1 ~ 3'](
-      Type.Array.With(
+      Type.Array.with(
         Type.Number.Negative.Integer.Between(1, 3)
-      ).As.Element.And.With(3).As.Length
+      ).as.Element.and.with(3).as.Length
     );
   });
 
   describe('With-Omit-As Expression', () => {
     SharedTest['Generates an Array with 3 Negative Numbers Ranged from 1 ~ 3'](
-      Type.Array.With(
+      Type.Array.with(
         Type.Number.Negative.Integer.Between(1, 3)
-      ).Element().And.With(3).Length()
+      ).Element().and.with(3).Length()
     );
   });
 
