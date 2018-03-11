@@ -12,13 +12,15 @@ const defaults = {
 
 /* TODO: Implement exclude zero */
 export default class BooleanType extends Type {
-  constructor(options = defaults) {
+  constructor(override) {
     super('Boolean', BooleanResolver);
-    this.type = assign('string', defaults.type, options.type);
-    this.probability = assign('number', defaults.probability, options.probability);
-    this.truthy = assign('any', defaults.truthy, options.truthy);
-    this.falsy = assign('any', defaults.falsy, options.falsy);
-    this.reversed = assign('boolean', defaults.reversed, options.reversed);
+    this.attributes([
+      { name: 'type', type: 'string', default: defaults.type },
+      { name: 'probability', type: 'number', default: defaults.probability },
+      { name: 'truthy', type: 'any', default: defaults.truthy },
+      { name: 'falsy', type: 'any', default: defaults.falsy },
+      { name: 'reversed', type: 'boolean', default: defaults.reversed }
+    ], override);
 
     this.BindAsProperties({
       BooleanLogic: () => this.switchMode('type', 'BOOLEAN_LOGIC'),

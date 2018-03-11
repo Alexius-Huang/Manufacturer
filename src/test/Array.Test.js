@@ -21,10 +21,12 @@ const SharedTest = {
 describe('ArrayType', () => {
   it('constructs new ArrayType object with Type.Array', () => {
     const arrayType = Type.Array;
+    const attributes = Manufacturer.attributesFor(arrayType);
 
     arrayType.should.have.property('title', 'Array');
-    arrayType.should.have.property('length');
-    arrayType.should.have.property('element');
+    arrayType.should.have.property('resolver');
+    attributes.should.have.property('length');
+    attributes.should.have.property('element');
     arrayType.constructor.name.should.be.exactly('ArrayType');
     arrayType.should.not.be.exactly(Type.Array);
 

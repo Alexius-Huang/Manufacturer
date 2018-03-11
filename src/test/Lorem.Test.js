@@ -31,12 +31,13 @@ const SharedTest = {
 describe('LoremType', () => {
   it('constructs new LoremType object with Type.String.Lorem', () => {
     const loremType = Type.String.Lorem;
+    const attributes = Manufacturer.attributesFor(loremType);
 
     loremType.should.have.property('title', 'Lorem');
     loremType.should.have.property('resolver');
-    loremType.should.have.property('unit');
-    loremType.should.have.property('random');
-    loremType.should.have.property('number');
+    attributes.should.have.property('unit');
+    attributes.should.have.property('random');
+    attributes.should.have.property('number');
     loremType.constructor.name.should.be.exactly('LoremType');
     loremType.should.not.be.exactly(Type.String.Lorem);
 

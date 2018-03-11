@@ -51,11 +51,13 @@ const SharedTest = {
 describe('GroupType', () => {
   it('constructs new GroupType object with Type.Group', () => {
     const groupType = Type.Group;
+    const attributes = Manufacturer.attributesFor(groupType);
+
     groupType.should.have.property('title', 'Group');
     groupType.should.have.property('resolver');
-    groupType.should.have.property('values');
-    groupType.should.have.property('shuffle');
-    groupType.should.have.property('sample');
+    attributes.should.have.property('values');
+    attributes.should.have.property('shuffle');
+    attributes.should.have.property('sample');
     groupType.constructor.name.should.be.exactly('GroupType');
     groupType.should.not.be.exactly(Type.Group);
 

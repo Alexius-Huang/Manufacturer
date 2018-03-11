@@ -7,10 +7,12 @@ const { Type } = Manufacturer;
 describe('DateType', () => {
   it('constructs new DateType object with Type.Date', () => {
     const dateType = Type.Date;
+    const attributes = Manufacturer.attributesFor(dateType);
+
     dateType.should.have.property('title', 'Date');
     dateType.should.have.property('resolver');
-    dateType.should.have.property('type');
-    dateType.should.have.property('format');
+    attributes.should.have.property('type');
+    attributes.should.have.property('format');
     dateType.constructor.name.should.be.exactly('DateType');
     dateType.should.not.be.exactly(Type.Date);
 

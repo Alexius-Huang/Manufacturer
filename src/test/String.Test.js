@@ -16,10 +16,12 @@ should.BehaveLike =
 describe('StringType', () => {
   it('constructs new StringType object with Type.String', () => {
     const stringType = Type.String;
+    const attributes = Manufacturer.attributesFor(stringType);
+
     stringType.should.have.property('title', 'String');
     stringType.should.have.property('resolver');
-    stringType.should.have.property('characters');
-    stringType.should.have.property('characterSet');
+    attributes.should.have.property('characters');
+    attributes.should.have.property('characterSet');
     stringType.constructor.name.should.be.exactly('StringType');
     stringType.should.not.be.exactly(Type.String);
 

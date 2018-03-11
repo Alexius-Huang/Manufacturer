@@ -1,6 +1,5 @@
 import Type from './Type';
 import GroupResolver from '../resolvers/Group.Resolver';
-import assign from '../helpers/assign';
 
 const defaults = {
   values: [],
@@ -9,11 +8,13 @@ const defaults = {
 };
 
 export default class GroupType extends Type {
-  constructor(options = defaults) {
+  constructor(override) {
     super('Group', GroupResolver);
-    this.values = assign('array', defaults.values, options.values);
-    this.shuffle = assign('boolean', defaults.shuffle, options.shuffle);
-    this.sample = assign('number', defaults.sample, options.sample);
+    this.attributes([
+      { name: 'values', type: 'array', default: defaults.values },
+      { name: 'shuffle', type: 'boolean', default: defaults.shuffle },
+      { name: 'sample', type: 'number', default: defaults.sample }
+    ], override);
 
     this.BindAsProperty('Shuffle', () => this.activate('shuffle'));
     this.BindTraitsWithPrepositions(['Values', 'Sample']);

@@ -1,6 +1,5 @@
 import Type from './Type';
 import NumberResolver from '../resolvers/Number.Resolver';
-import assign from '../helpers/assign'; 
 
 const defaults = {
   type: 'integer',
@@ -14,14 +13,16 @@ const defaults = {
 
 /* TODO: Implement exclude zero */
 export default class NumberType extends Type {
-  constructor(options = defaults) {
+  constructor(override) {
     super('Number', NumberResolver);
-    this.type = assign('string', defaults.type, options.type);
-    this.max = assign('number', defaults.max, options.max);
-    this.min = assign('number', defaults.min, options.min);
-    this.positive = assign('boolean', defaults.positive, options.positive);
-    this.negative = assign('boolean', defaults.negative, options.negative);
-    this.zero = assign('boolean', defaults.zero, options.zero);
+    this.attributes([
+      { name: 'type', type: 'string', default: defaults.type },
+      { name: 'max', type: 'number', default: defaults.max },
+      { name: 'min', type: 'number', default: defaults.min },
+      { name: 'positive', type: 'boolean', default: defaults.positive },
+      { name: 'negative', type: 'boolean', default: defaults.negative },
+      { name: 'zero', type: 'boolean', default: defaults.zero }
+    ], override);
 
     this.BindAsProperties({
       Positive: () => this
@@ -40,8 +41,8 @@ export default class NumberType extends Type {
   }
 
   Between(min, max) {
-    this.min = min || defaults.min;
-    this.max = max || defaults.max;
+    this.__namespaced_store__.min = min || defaults.min;
+    this.__namespaced_store__.max = max || defaults.max;
     return this;
   }
 
@@ -50,7 +51,7 @@ export default class NumberType extends Type {
   }
 
   Maximum(max) {
-    this.max = max || this.__cache__ || defaults.max;
+    this.__namespaced_store__.max = max || this.__cache__ || defaults.max;
     this.__cache__ = null;
     return this;
   }
@@ -60,7 +61,7 @@ export default class NumberType extends Type {
   }
 
   Minimum(min) {
-    this.min = min || this.__cache__ || defaults.min;
+    this.__namespaced_store__.min = min || this.__cache__ || defaults.min;
     this.__cache__ = null;
     return this;
   }

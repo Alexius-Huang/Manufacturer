@@ -1,7 +1,6 @@
 import Type from './Type';
 import LoremType from './Lorem.Type';
 import StringResolver from '../resolvers/String.Resolver';
-import assign from '../helpers/assign';
 
 const defaults = {
   characters: 10,
@@ -9,10 +8,12 @@ const defaults = {
 };
 
 export default class StringType extends Type {
-  constructor(options = defaults) {
+  constructor(override) {
     super('String', StringResolver);
-    this.characters = assign('number', defaults.characters, options.characters);
-    this.characterSet = assign('string', defaults.characterSet, options.characterSet);
+    this.attributes([
+      { name: 'characters', type: 'number', default: defaults.characters },
+      { name: 'characterSet', type: 'string', default: defaults.characterSet }
+    ], override);
 
     this.BindTraitsWithPrepositions(['Characters', 'CharacterSet']);
   }

@@ -101,6 +101,18 @@ class Manufacturer {
   static define(blueprint) {
     return new Manufacturer(blueprint);
   }
+
+  static attributesFor(typeObject) {
+    if (!isTypeObject(typeObject)) {
+      throw new Error(`Manufacturer.attributesFor should receive \`Type\` object. Instead got: ${typeof typeObject}`);
+    }
+
+    if (!isFunction(typeObject.__getProperties__)) {
+      throw new Error(`Manufacturer cannot get property from \`Type\` object, suppose to have Type#__getProperties function.`);
+    }
+
+    return typeObject.__getProperties__();
+  }
 }
 
 Manufacturer.Type = Type;

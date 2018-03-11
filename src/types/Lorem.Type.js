@@ -1,6 +1,5 @@
 import Type from './Type';
 import LoremResolver from '../resolvers/Lorem.Resolver';
-import assign from '../helpers/assign';
 
 const defaults = {
   unit: 'word',
@@ -9,11 +8,13 @@ const defaults = {
 };
 
 export default class LoremType extends Type {
-  constructor(options = defaults) {
+  constructor(override) {
     super('Lorem', LoremResolver);
-    this.unit = assign('string', defaults.unit, options.unit);
-    this.random = assign('boolean', defaults.random, options.random);
-    this.number = assign('number', defaults.number, options.number);
+    this.attributes([
+      { name: 'unit', type: 'string', default: defaults.unit },
+      { name: 'random', type: 'boolean', default: defaults.random },
+      { name: 'number', type: 'number', default: defaults.number }
+    ], override);
 
     this.BindAsProperty('Random', () => this.activate('random'));
     this.BindTraitsWithPrepositions(['Unit', 'Number', 'Words', 'Sentences', 'Paragraphs']);

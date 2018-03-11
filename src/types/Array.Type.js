@@ -1,6 +1,5 @@
 import Type from './Type';
 import ArrayResolver from '../resolvers/Array.Resolver';
-import assign from '../helpers/assign';
 
 const defaults = {
   length: 5,
@@ -8,10 +7,12 @@ const defaults = {
 };
 
 export default class ArrayType extends Type {
-  constructor(options = defaults) {
+  constructor(override) {
     super('Array', ArrayResolver);
-    this.length = assign('number', defaults.length, options.length);
-    this.element = assign('any', defaults.element, options.element);
+    this.attributes([
+      { name: 'length', type: 'number', default: defaults.length },
+      { name: 'element', type: 'any', default: defaults.element }
+    ], override);
 
     this.BindTraitsWithPrepositions(['Length', 'Element']);
   }

@@ -10,14 +10,15 @@ function repeat(number, callback) {
 describe('BooleanType', () => {
   it('constructs new BooleanType object with Type.Boolean', () => {
     const booleanType = Type.Boolean;
+    const attributes = Manufacturer.attributesFor(booleanType);
 
     booleanType.should.have.property('title', 'Boolean');
     booleanType.should.have.property('resolver');
-    booleanType.should.have.property('type');
-    booleanType.should.have.property('probability');
-    booleanType.should.have.property('truthy');
-    booleanType.should.have.property('falsy');
-    booleanType.should.have.property('reversed');
+    attributes.should.have.property('type');
+    attributes.should.have.property('probability');
+    attributes.should.have.property('truthy');
+    attributes.should.have.property('falsy');
+    attributes.should.have.property('reversed');
     booleanType.constructor.name.should.be.exactly('BooleanType');
     booleanType.should.not.be.exactly(Type.Boolean);
     

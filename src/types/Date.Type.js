@@ -1,6 +1,5 @@
 import Type from './Type';
 import DateResolver from '../resolvers/Date.Resolver';
-import assign from '../helpers/assign';
 
 const defaults = {
   startTime: null,
@@ -12,11 +11,13 @@ const defaults = {
 };
 
 export default class DateType extends Type {
-  constructor(options = defaults) {
+  constructor(override) {
     super('Date', DateResolver);
-    this.format = assign('string', defaults.format, options.format);
-    this.type = assign('string', defaults.type, options.type);
-    this.locale = assign('string', defaults.locale, options.locale);
+    this.attributes([
+      { name: 'format', type: 'string', default: defaults.format },
+      { name: 'type', type: 'string', default: defaults.type },
+      { name: 'locale', type: 'string', default: defaults.locale }
+    ], override);
   }
 }
 

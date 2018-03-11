@@ -1,4 +1,5 @@
 import { isString, isArray, isUndefined, isFunction } from '../helpers/is';
+import assign from '../helpers/assign';
 
 if (!String.prototype.capitalize) {
   String.prototype.capitalize = function () {
@@ -10,6 +11,8 @@ export default class Type {
   constructor(title, resolver) {
     this.title = title;
     this.resolver = resolver || (this.constuctor || this.constructor.resolver);
+
+    this.__namespaced_store__ = {};
 
     /* Prepositions */
     this.as = {};
@@ -29,23 +32,25 @@ export default class Type {
   }
 
   activate(trait) {
-    this[trait] = true;
+    this.__namespaced_store__[trait] = true;
     return this;
   }
 
   deactivate(trait) {
-    this[trait] = false;
+    this.__namespaced_store__[trait] = false;
     return this;
   }
 
   switchMode(trait, value) {
-    this[trait] = value;
+    this.__namespaced_store__[trait] = value;
     return this;
   }
 
+  __getProperties__() { return this.__namespaced_store__; }
+
   resolve() {
     if (this.resolver) {
-      return this.resolver(this);
+      return this.resolver(this.__getProperties__());
     }
 
     return new Error(`\`${this.constructor.name}\` requires a resolver to generate data, you can provide a function which returns a value and set by class method: \`UseResolver\``);
@@ -57,11 +62,11 @@ export default class Type {
     /* Define Direct-Trait Method */
     this.prototype[capitalizedTraitName] = function(traitInputValue) {
       if (!isUndefined(traitInputValue)) {
-        this[traitName] = traitInputValue;
+        this.__namespaced_store__[traitName] = traitInputValue;
       } else if (!isUndefined(this.__cache__)) {
-        this[traitName] = this.__cache__;
+        this.__namespaced_store__[traitName] = this.__cache__;
       } else {
-        this[traitName] = defaultValue;
+        this.__namespaced_store__[traitName] = defaultValue;
       }
       this.__cache__ = undefined;
       return this;
@@ -105,6 +110,13 @@ export default class Type {
       this[title] = callback;
     });
     return this;
+  }
+
+  attributes(arrayOfProps, override = {}) {
+    for (let i = 0; i < arrayOfProps.length; i++) {
+      const { name, type, default: defaultValue } = arrayOfProps[i];
+      this.__namespaced_store__[name] = assign(type, defaultValue, override[name]);
+    }
   }
 
   BindActivePrepositionMethods() {

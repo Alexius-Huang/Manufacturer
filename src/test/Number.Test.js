@@ -34,14 +34,16 @@ const SharedTest = {
 describe('Number Type', () => {
   it('constructs new NumberType object with Type.Number', () => {
     const numberType = Type.Number;
+    const attributes = Manufacturer.attributesFor(numberType);
+ 
     numberType.should.have.property('title', 'Number');
     numberType.should.have.property('resolver');
-    numberType.should.have.property('type');
-    numberType.should.have.property('max');
-    numberType.should.have.property('min');
-    numberType.should.have.property('positive');
-    numberType.should.have.property('negative');
-    numberType.should.have.property('zero');
+    attributes.should.have.property('type');
+    attributes.should.have.property('max');
+    attributes.should.have.property('min');
+    attributes.should.have.property('positive');
+    attributes.should.have.property('negative');
+    attributes.should.have.property('zero');
     numberType.constructor.name.should.be.exactly('NumberType');
     numberType.should.not.be.exactly(Type.Number);
 
